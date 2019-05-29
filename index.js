@@ -38,6 +38,9 @@ class SvgVue {
     webpackRules() {
         return {
             test: /\.svg$/,
+            include: [
+                path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath)
+            ],
             loaders: [
                 {
                     loader: 'raw-loader'
