@@ -13,7 +13,7 @@ class SvgVue {
     register(options) {
         this.options = Object.assign({
             extract: false,
-            path: './resources/svg/',
+            svgPath: 'resources/svg',
             svgoSettings: [
                 { removeTitle: true },
                 { removeViewBox: false },
@@ -57,17 +57,17 @@ class SvgVue {
 
     webpackConfig(webpackConfig) {
         let fs = require('fs');
-        let svgPath = path.resolve(__dirname, process.cwd() + '/' + this.options.path);
+        let svgPathResolved = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
 
-        fs.mkdir(svgPath, error => {
+        fs.mkdir(svgPathResolved, error => {
             if (error && error.code === 'EEXIST') return null;
         });
 
-        webpackConfig.resolve.alias['svg-files-path'] = svgPath;
+        webpackConfig.resolve.alias['svg-files-path'] = svgPathResolved;
 
         if (this.options.extract) {
             let svgAssetsObj = {
-                test: svgPath,
+                test: svgPathResolved,
                 name: '/js/svg',
                 chunks: 'all',
                 enforce: true
