@@ -12,8 +12,8 @@ class SvgVue {
 
     register(options) {
         this.options = Object.assign({
-            extract: false,
             svgPath: 'resources/svg',
+            extract: false,
             svgoSettings: [
                 { removeTitle: true },
                 { removeViewBox: false },
