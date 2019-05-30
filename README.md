@@ -95,4 +95,4 @@ Option | Type | Default | Description
 ---|---|---|---
 `svgPath` | String | `resources/svg` | Path to your SVG files
 `extract` | Boolean | `false` | Separate the SVG's from your main bundle
-`svgoSettings` | Array | <code>[{&nbsp;removeTitle:&nbsp;true&nbsp;},<br>{&nbsp;removeViewBox:&nbsp;false&nbsp;},<br>{&nbsp;removeDimensions:&nbsp;true&nbsp;}]</code> | SVGO settings
+`svgoSettings` | Array | <code>[{&nbsp;removeTitle:&nbsp;true&nbsp;}, {&nbsp;removeViewBox:&nbsp;false&nbsp;}, {&nbsp;removeDimensions:&nbsp;true&nbsp;}]</code> | SVGO settings
