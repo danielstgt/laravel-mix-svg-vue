@@ -30,7 +30,7 @@ class SvgVue {
             ];
 
             config.module.rules.map(r => {
-                if (search.includes(r.test.toString())) r.exclude = /\.svg$/;
+                if (search.includes(r.test.toString())) r.exclude = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
             });
         });
     }
