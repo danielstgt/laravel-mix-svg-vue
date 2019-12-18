@@ -20,17 +20,16 @@ class SvgVue {
                 { removeDimensions: true }
             ]
         }, options);
+
+        this.includePath = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
     }
 
     boot() {
         Mix.listen('configReady', config => {
-            let search = [
-                /(\.(png|jpe?g|gif|webp)$|^((?!font).)*\.svg$)/.toString(),
-                /(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/.toString()
-            ];
-
             config.module.rules.map(r => {
-                if (search.includes(r.test.toString())) r.exclude = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
+                if (this._isSvgRegExp(r.test) && ! this._isSvgVueRule(r)) {
+                    r.exclude = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
+                }
             });
         });
     }
@@ -39,7 +38,7 @@ class SvgVue {
         return {
             test: /\.svg$/,
             include: [
-                path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath)
+                this.includePath
             ],
             loaders: [
                 {
@@ -60,17 +59,16 @@ class SvgVue {
 
     webpackConfig(webpackConfig) {
         let fs = require('fs');
-        let svgPathResolved = path.resolve(__dirname, process.cwd() + '/' + this.options.svgPath);
 
-        fs.mkdir(svgPathResolved, error => {
+        fs.mkdir(this.includePath, error => {
             if (error && error.code === 'EEXIST') return null;
         });
 
-        webpackConfig.resolve.alias['svg-files-path'] = svgPathResolved;
+        webpackConfig.resolve.alias['svg-files-path'] = this.includePath;
 
         if (this.options.extract) {
             let svgAssetsObj = {
-                test: svgPathResolved,
+                test: this.includePath,
                 name: '/js/svg',
                 chunks: 'all',
                 enforce: true
@@ -88,6 +86,20 @@ class SvgVue {
                 }
             }
         }
+    }
+
+    _isSvgRegExp(pattern) {
+        let regExCheck = new RegExp(pattern);
+
+        return regExCheck.test('.svg') || regExCheck.test('font.svg');
+    }
+
+    _isSvgVueRule(rule) {
+        if (rule.hasOwnProperty('include')) {
+            return rule.include.includes(this.includePath);
+        }
+
+        return false;
     }
 
 }
