@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/danielstgt/laravel-mix-svg-vue",
   "peerDependencies": {
-    "laravel-mix": "^4.0.15"
+    "laravel-mix": "^4.0.15||^5.0.0"
   },
   "dependencies": {
     "fs": "0.0.1-security",
