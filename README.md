@@ -74,7 +74,7 @@ If nothing is passed to the extension inside your Laravel Mix config, the follow
 
 #### `svgPath`
 
-The path to your SVG files relativ to the Laravel Mix config.
+The path to your SVG files relative to the Laravel Mix config.
 
 #### `extract`
 
