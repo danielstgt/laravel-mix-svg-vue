@@ -101,3 +101,34 @@ Option | Type | Default | Description
 `svgPath` | String | `resources/svg` | Path to your SVG files
 `extract` | Boolean | `false` | Separate the SVG's from your main bundle
 `svgoSettings` | Array | <code>[{&nbsp;removeTitle:&nbsp;true&nbsp;}, {&nbsp;removeViewBox:&nbsp;false&nbsp;}, {&nbsp;removeDimensions:&nbsp;true&nbsp;}]</code> | SVGO settings
+
+#### Toggling icons or rendering inside lists
+
+Not really related to SVG Vue, but when more than one `<svg-vue>` icon is rendered inside a conditional state with `v-if` or `v-for`, a `key` attribute should be used to tell Vue that an element needs to change when any condition changes.
+
+While in most cases the cost for toggling elements with `v-show` should be preferred (also no need for a `key` attribute then), a simple example when toggling an icon with `v-if` inside a button could look like this:
+
+```html
+<button v-if="active" key="active-btn">
+    <svg-vue icon="active-icon" class="..."></svg-vue>
+    <span>Active</span>
+</button>
+
+<button v-if="inactive" key="inactive-btn">
+    <svg-vue icon="inactive-icon" class="..."></svg-vue>
+    <span>Inactive</span>
+</button>
+```
+
+Rendering lists could be handled like this:
+
+```html
+<ul>
+    <li v-for="item in items" :key="item.id">
+        <p>{{ item.title }}</p>
+        <svg-vue :icon="item.icon" class="..."></svg-vue>
+    </li>
+</ul>
+```
+
+Just remember the `key` has to be unique. More examples for this can be found in the Vue documentation.
