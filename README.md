@@ -28,6 +28,7 @@ Next require the extension inside your Laravel Mix config and call `svgVue()` in
 const mix = require('laravel-mix');
 require('laravel-mix-svg-vue');
 
+// add .vue() to the pipeline if you are using mix v6
 mix.js('resources/js/app.js', 'public/js')
     .svgVue();
 ```
@@ -132,3 +133,7 @@ Rendering lists could be handled like this:
 ```
 
 Just remember the `key` has to be unique. More examples for this can be found in the Vue documentation.
+
+When toggling between elements that have the same tag name, you must tell Vue that they are distinct elements by giving them unique key attributes. Otherwise, Vue’s compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, it’s considered good practice to always key multiple items within a component.
+
+https://stackoverflow.com/questions/42019828/smoothly-animate-v-show-in-vuejs
