@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let path = require('path');
 
 class SvgVue {
 
@@ -40,7 +41,7 @@ class SvgVue {
             include: [
                 this.includePath
             ],
-            loaders: [
+            rules: [
                 {
                     loader: 'raw-loader'
                 },
