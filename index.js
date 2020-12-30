@@ -8,7 +8,7 @@ class SvgVue {
     }
 
     dependencies() {
-        return ['img-loader', 'imagemin-svgo', 'raw-loader', 'fs', 'svg-vue'];
+        return ['img-loader', 'imagemin-svgo', 'raw-loader', 'fs', 'svg-vue', 'svg-vue3'];
     }
 
     register(options) {
