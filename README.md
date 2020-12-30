@@ -28,12 +28,14 @@ Next require the extension inside your Laravel Mix config and call `svgVue()` in
 const mix = require('laravel-mix');
 require('laravel-mix-svg-vue');
 
-// add .vue() to the pipeline if you are using mix v6
 mix.js('resources/js/app.js', 'public/js')
+    // .vue() // only necessary if you are using mix v6
     .svgVue();
 ```
 
-The last step is to import and register the Vue component:
+The last step is to import and register the Vue component, either for Vue 2 or 3. Notice the different imports for `SvgVue`:
+
+#### Vue 2
 
 ```js
 // e.g. app.js
@@ -41,6 +43,23 @@ import Vue from 'vue';
 import SvgVue from 'svg-vue';
 
 Vue.use(SvgVue);
+
+const app = new Vue({
+    el: '#app'
+});
+```
+
+#### Vue 3
+
+```js
+import { createApp } from 'vue';
+import SvgVue from 'svg-vue3';
+
+const app = createApp({});
+
+app.use(SvgVue);
+
+app.mount('#app');
 ```
 
 ## Usage
@@ -93,7 +112,7 @@ If you wish to extract the SVG's to a separate file instead of including them in
 
 #### `svgoSettings`
 
-Determines which settings should be passed to SVGO. [See here](https://github.com/svg/svgo#what-it-can-do) for a List of available settings.
+Determines which settings should be passed to SVGO. [See here](https://github.com/svg/svgo#what-it-can-do) for a list of available settings.
 
 #### Options overview
 
@@ -103,7 +122,7 @@ Option | Type | Default | Description
 `extract` | Boolean | `false` | Separate the SVG's from your main bundle
 `svgoSettings` | Array | <code>[{&nbsp;removeTitle:&nbsp;true&nbsp;}, {&nbsp;removeViewBox:&nbsp;false&nbsp;}, {&nbsp;removeDimensions:&nbsp;true&nbsp;}]</code> | SVGO settings
 
-#### Toggling icons or rendering inside lists
+## A note for toggling or rendering icons inside lists
 
 Not really related to SVG Vue, but when more than one `<svg-vue>` icon is rendered inside a conditional state with `v-if` or `v-for`, a `key` attribute should be used to tell Vue that an element needs to change when any condition changes.
 
@@ -135,5 +154,3 @@ Rendering lists could be handled like this:
 Just remember the `key` has to be unique. More examples for this can be found in the Vue documentation.
 
 When toggling between elements that have the same tag name, you must tell Vue that they are distinct elements by giving them unique key attributes. Otherwise, Vue’s compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, it’s considered good practice to always key multiple items within a component.
-
-https://stackoverflow.com/questions/42019828/smoothly-animate-v-show-in-vuejs
