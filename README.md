@@ -52,6 +52,7 @@ const app = new Vue({
 #### Vue 3
 
 ```js
+// e.g. app.js
 import { createApp } from 'vue';
 import SvgVue from 'svg-vue3';
 
