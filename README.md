@@ -1,10 +1,16 @@
+<p align="center">
+    <img src="https://raw.githubusercontent.com/danielstgt/laravel-mix-svg-vue/master/art/logo.svg">
+</p>
+
+<p align="center">
+    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue"><img src="https://img.shields.io/npm/v/laravel-mix-svg-vue.svg?color=blue" alt="Latest Version"></a>
+    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue"><img src="https://img.shields.io/npm/l/laravel-mix-svg-vue.svg?color=blueviolet" alt="License"></a>
+    <a href="https://npmcharts.com/compare/laravel-mix-svg-vue?minimal=true"><img src="https://img.shields.io/npm/dm/laravel-mix-svg-vue.svg" alt="Downloads"></a>
+</p>
+
 # Laravel Mix SVG Vue
 
 **Extension to inline SVG files with Vue.js and optimize them automatically with SVGO.**
-
-[![](https://img.shields.io/npm/v/laravel-mix-svg-vue.svg?color=blue)](https://www.npmjs.com/package/laravel-mix-svg-vue)
-[![](https://img.shields.io/npm/l/laravel-mix-svg-vue.svg?color=blueviolet)](https://www.npmjs.com/package/laravel-mix-svg-vue)
-[![](https://img.shields.io/npm/dm/laravel-mix-svg-vue.svg)](https://npmcharts.com/compare/laravel-mix-svg-vue?minimal=true)
 
 ## Installation
 
