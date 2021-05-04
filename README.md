@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue"><img src="https://img.shields.io/npm/v/laravel-mix-svg-vue.svg?color=blue" alt="Latest Version"></a>
-    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue"><img src="https://img.shields.io/npm/l/laravel-mix-svg-vue.svg?color=blueviolet" alt="License"></a>
-    <a href="https://npmcharts.com/compare/laravel-mix-svg-vue?minimal=true"><img src="https://img.shields.io/npm/dm/laravel-mix-svg-vue.svg" alt="Downloads"></a>
+    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue" target="_blank"><img src="https://img.shields.io/npm/v/laravel-mix-svg-vue.svg?color=blue" alt="Latest Version"></a>
+    <a href="https://www.npmjs.com/package/laravel-mix-svg-vue" target="_blank"><img src="https://img.shields.io/npm/l/laravel-mix-svg-vue.svg?color=blueviolet" alt="License"></a>
+    <a href="https://npmcharts.com/compare/laravel-mix-svg-vue?minimal=true" target="_blank"><img src="https://img.shields.io/npm/dm/laravel-mix-svg-vue.svg" alt="Downloads"></a>
 </p>
 
 # Laravel Mix SVG Vue
