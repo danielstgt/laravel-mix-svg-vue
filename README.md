@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/danielstgt/laravel-mix-svg-vue/master/art/logo.svg" width="600" height="100%">
+    <img src="https://raw.githubusercontent.com/danielstgt/laravel-mix-svg-vue/master/art/logo.svg" width="674" height="124">
 </p>
 
 <p align="center">
