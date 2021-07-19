@@ -8,7 +8,7 @@ class SvgVue {
     }
 
     dependencies() {
-        return ['img-loader', 'imagemin-svgo', 'raw-loader', 'fs', 'svg-vue', 'svg-vue3'];
+        return ['svgo-loader', 'raw-loader', 'fs', 'svg-vue', 'svg-vue3'];
     }
 
     register(options) {
@@ -47,12 +47,8 @@ class SvgVue {
                 },
 
                 {
-                    loader: 'img-loader',
-                    options: {
-                        plugins: [
-                            require('imagemin-svgo')({ plugins: this.options.svgoSettings })
-                        ]
-                    }
+                    loader: 'svgo-loader',
+                    options: Object.fromEntries(this.options.svgoSettings)
                 }
             ]
         }
