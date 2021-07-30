@@ -48,7 +48,9 @@ class SvgVue {
 
                 {
                     loader: 'svgo-loader',
-                    options: Object.fromEntries(this.options.svgoSettings)
+                    options: {
+                        plugins: this._convertSvgoOptions(this.options.svgoSettings)
+                    }
                 }
             ]
         }
@@ -97,6 +99,23 @@ class SvgVue {
         }
 
         return false;
+    }
+
+    _convertSvgoOptions(options) {
+        let converted = [];
+
+        options.forEach(option => {
+            let settings = Object.keys(option);
+
+            settings.forEach(setting => {
+                converted.push({
+                    name: setting,
+                    active: !! option
+                });
+            });
+        });
+
+        return converted;
     }
 
 }
