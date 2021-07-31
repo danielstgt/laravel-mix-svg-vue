@@ -1,5 +1,6 @@
 let mix = require('laravel-mix');
 let path = require('path');
+const { extendDefaultPlugins } = require('svgo');
 
 class SvgVue {
 
@@ -49,7 +50,7 @@ class SvgVue {
                 {
                     loader: 'svgo-loader',
                     options: {
-                        plugins: this._convertSvgoOptions(this.options.svgoSettings)
+                        plugins: extendDefaultPlugins(this._convertSvgoOptions(this.options.svgoSettings))
                     }
                 }
             ]
