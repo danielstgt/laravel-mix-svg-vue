@@ -14,15 +14,11 @@
 
 ## Installation
 
-Install the extension:
-
 ```sh
+# npm
 npm install laravel-mix-svg-vue
-```
 
-Or if you prefer yarn:
-
-```sh
+# yarn
 yarn add laravel-mix-svg-vue
 ```
 
@@ -118,7 +114,7 @@ If you wish to extract the SVG's to a separate file instead of including them in
 
 #### `svgoSettings`
 
-Determines which settings should be passed to SVGO. [See here](https://github.com/svg/svgo#what-it-can-do) for a list of available settings.
+Plugins configurations passed to SVGO. [See here](https://github.com/svg/svgo#built-in-plugins) for a list of available settings.
 
 #### Options overview
 
@@ -128,9 +124,9 @@ Option | Type | Default | Description
 `extract` | Boolean | `false` | Separate the SVG's from your main bundle
 `svgoSettings` | Array | <code>[{&nbsp;removeTitle:&nbsp;true&nbsp;}, {&nbsp;removeViewBox:&nbsp;false&nbsp;}, {&nbsp;removeDimensions:&nbsp;true&nbsp;}]</code> | SVGO settings
 
-## A note for toggling or rendering icons inside lists
+## Toggling or rendering icons inside lists
 
-Not really related to SVG Vue, but when more than one `<svg-vue>` icon is rendered inside a conditional state with `v-if` or `v-for`, a `key` attribute should be used to tell Vue that an element needs to change when any condition changes.
+Not really related to this extension, but when more than one `<svg-vue>` icon is rendered inside a conditional state with `v-if` or `v-for`, a `key` attribute should be used to tell Vue that an element needs to change when any condition changes.
 
 While in most cases the cost for toggling elements with `v-show` should be preferred (also no need for a `key` attribute then), a simple example when toggling an icon with `v-if` inside a button could look like this:
 
@@ -159,4 +155,4 @@ Rendering lists could be handled like this:
 
 Just remember the `key` has to be unique. More examples for this can be found in the Vue documentation.
 
-When toggling between elements that have the same tag name, you must tell Vue that they are distinct elements by giving them unique key attributes. Otherwise, Vue’s compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, it’s considered good practice to always key multiple items within a component.
+When toggling between elements that have the same tag name, you must tell Vue that they are distinct by giving them unique key attributes. Otherwise Vue’s compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, it’s considered good practice to always key multiple items within a component.
