@@ -114,7 +114,7 @@ If you wish to extract the SVG's to a separate file instead of including them in
 
 #### `svgoSettings`
 
-Plugin configurations passed to SVGO. [See here](https://github.com/svg/svgo#built-in-plugins) for a list of available settings.
+Plugin configuration passed to SVGO. [See here](https://github.com/svg/svgo#built-in-plugins) for a list of available settings.
 
 #### Options overview
 
