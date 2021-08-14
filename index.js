@@ -111,7 +111,7 @@ class SvgVue {
             settings.forEach(setting => {
                 converted.push({
                     name: setting,
-                    active: !! option
+                    active: option[setting]
                 });
             });
         });
