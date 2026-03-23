@@ -44,7 +44,7 @@ class SvgVue {
             ],
             rules: [
                 {
-                    loader: 'raw-loader'
+                    loader: 'raw-loader' // TODO: change loaders
                 },
 
                 {
