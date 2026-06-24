@@ -48,7 +48,7 @@ class SvgVue {
     }
 
     dependencies() {
-        return ['svgo-loader', 'raw-loader', 'fs', 'svg-vue', 'svg-vue3'];
+        return ['svgo-loader', 'raw-loader', 'svg-vue', 'svg-vue3'];
     }
 
     register(options) {

@@ -1,6 +1,6 @@
 {
   "name": "laravel-mix-svg-vue",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A Laravel Mix extension to inline SVG files with Vue.js and automatically optimize them with SVGO",
   "main": "index.js",
   "files": [
@@ -34,8 +34,6 @@
     "laravel-mix": "^4.0.15 || ^5.0.0 || ^6.0.0"
   },
   "dependencies": {
-    "fs": "0.0.1-security",
-    "path": "^0.12.7",
     "raw-loader": "^4.0.0",
     "svg-vue": "^0.2.0",
     "svg-vue3": "^0.2.1",

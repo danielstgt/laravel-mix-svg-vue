@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import SvgVue from 'svg-vue/src/svg-vue.vue';
+import SvgVue from 'svg-vue/src/svg-vue.js';
 
 describe('svg-vue (Vue 2)', () => {
     it('renders the referenced SVG inline as an <svg> element', () => {
