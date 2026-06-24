@@ -32,4 +32,27 @@ describe('svg-vue3 (Vue 3)', () => {
 
         expect(wrapper.html()).toContain('<circle');
     });
+
+    it('logs an error and renders an empty <svg> instead of throwing when the icon is missing', () => {
+        const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+        const wrapper = mount(SvgVue, { props: { icon: 'does-not-exist' } });
+
+        expect(wrapper.element.tagName.toLowerCase()).toBe('svg');
+        expect(wrapper.element.innerHTML).toBe('');
+        expect(spy).toHaveBeenCalled();
+        expect(spy.mock.calls[0][0]).toContain('does-not-exist');
+
+        spy.mockRestore();
+    });
+
+    it('mentions the ".svg" extension pitfall when the icon name includes it', () => {
+        const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+        mount(SvgVue, { props: { icon: 'avatar.svg' } });
+
+        expect(spy.mock.calls[0][0]).toContain('.svg');
+
+        spy.mockRestore();
+    });
 });

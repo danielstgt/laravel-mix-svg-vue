@@ -79,6 +79,8 @@ To display your SVG files, all you need to do is pass the filename (and path if 
 <svg-vue icon="fontawesome.check"></svg-vue>
 ```
 
+The icon name is the path relative to your `svgPath` **without** the `.svg` extension. If an icon cannot be found, the component logs a descriptive error to the browser console and renders an empty `<svg>` instead of throwing, so a single mistyped name won't break the rest of your app.
+
 ## Options
 
 #### Default options
