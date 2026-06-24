@@ -156,3 +156,27 @@ Rendering lists could be handled like this:
 Just remember the `key` has to be unique. More examples for this can be found in the Vue documentation.
 
 When toggling between elements that have the same tag name, you must tell Vue that they are distinct by giving them unique key attributes. Otherwise Vue’s compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, it’s considered good practice to always key multiple items within a component.
+
+## Testing
+
+The test suite runs against both Vue 2 (`svg-vue`) and Vue 3 (`svg-vue3`). The components are consumed from their local sibling repositories, so check them out next to this repo before installing:
+
+```
+code/
+├── laravel-mix-svg-vue
+├── svg-vue
+└── svg-vue3
+```
+
+```sh
+npm install
+```
+
+```sh
+# run both Vue versions
+npm test
+
+# or a single version
+npm run test:vue2
+npm run test:vue3
+```
