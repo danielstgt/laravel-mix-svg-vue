@@ -69,5 +69,21 @@ module.exports = {
                 ...svgFilesPath,
             },
         },
+        {
+            // Framework-agnostic unit tests for index.js (SVGO pipeline). Runs in
+            // node — no jsdom/Vue needed. `laravel-mix` (a peerDependency, not
+            // installed here) is mapped to a stub so index.js can be required.
+            displayName: 'node',
+            rootDir: __dirname,
+            testEnvironment: 'node',
+            testMatch: ['<rootDir>/tests/unit/**/*.test.js'],
+            moduleFileExtensions: ['js', 'json'],
+            transform: {
+                '^.+\\.js$': 'babel-jest',
+            },
+            moduleNameMapper: {
+                '^laravel-mix$': '<rootDir>/tests/mocks/laravel-mix.js',
+            },
+        },
     ],
 };

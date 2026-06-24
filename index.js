@@ -122,3 +122,8 @@ class SvgVue {
 }
 
 mix.extend('svgVue', new SvgVue());
+
+// Exported for the unit tests so the real SVGO pipeline (defaults, option
+// conversion, plugin list) is exercised instead of a copy. Consumers require this
+// package for its `mix.extend` side effect above and ignore the return value.
+module.exports = SvgVue;

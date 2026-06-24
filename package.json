@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest",
     "test:vue2": "jest --selectProjects vue2",
-    "test:vue3": "jest --selectProjects vue3"
+    "test:vue3": "jest --selectProjects vue3",
+    "test:unit": "jest --selectProjects node"
   },
   "repository": {
     "type": "git",
