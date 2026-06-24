@@ -11,7 +11,7 @@ const SOURCE_SVG =
 
 // Build the exact svgo plugin list index.js hands to svgo-loader, then run it
 // through svgo the same way svgo-loader v3 does: optimize(source, { plugins }).
-// This drives the real defaults + _convertSvgoOptions + extendDefaultPlugins,
+// This drives the real defaults + _buildSvgoPlugins (preset-default + overrides),
 // not a copy of them.
 function optimizeWith(options) {
     const extension = new SvgVue();
@@ -53,19 +53,31 @@ describe('SVGO settings (index.js)', () => {
         });
     });
 
-    describe('_convertSvgoOptions', () => {
-        it('maps { name: value } entries to svgo v2 { name, active } descriptors', () => {
-            const converted = new SvgVue()._convertSvgoOptions([
+    describe('_buildSvgoPlugins', () => {
+        it('maps the default settings to a preset-default config (no deprecated extendDefaultPlugins)', () => {
+            const plugins = new SvgVue()._buildSvgoPlugins([
                 { removeTitle: true },
                 { removeViewBox: false },
                 { removeDimensions: true },
             ]);
 
-            expect(converted).toEqual([
-                { name: 'removeTitle', active: true },
-                { name: 'removeViewBox', active: false },
-                { name: 'removeDimensions', active: true },
+            expect(plugins).toEqual([
+                // removeTitle stays at its preset-default value (enabled), so it
+                // produces no override; removeViewBox is disabled via overrides;
+                // removeDimensions is not part of preset-default, so it is appended.
+                { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+                'removeDimensions',
             ]);
+        });
+
+        it('does not emit the deprecated extendDefaultPlugins warning', () => {
+            const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+            optimizeWith();
+
+            expect(warn).not.toHaveBeenCalled();
+
+            warn.mockRestore();
         });
     });
 });

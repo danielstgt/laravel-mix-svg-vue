@@ -1,6 +1,45 @@
 let mix = require('laravel-mix');
 let path = require('path');
-const { extendDefaultPlugins } = require('svgo');
+
+// Plugins that ship enabled in SVGO v2's "preset-default". Mirrors the list in
+// svgo/plugins/preset-default.js. Used to decide whether a svgoSetting is a
+// tweak to the preset (via `overrides`) or a plugin that has to be added on top.
+const PRESET_DEFAULT_PLUGINS = new Set([
+    'removeDoctype',
+    'removeXMLProcInst',
+    'removeComments',
+    'removeMetadata',
+    'removeEditorsNSData',
+    'cleanupAttrs',
+    'mergeStyles',
+    'inlineStyles',
+    'minifyStyles',
+    'cleanupIDs',
+    'removeUselessDefs',
+    'cleanupNumericValues',
+    'convertColors',
+    'removeUnknownsAndDefaults',
+    'removeNonInheritableGroupAttrs',
+    'removeUselessStrokeAndFill',
+    'removeViewBox',
+    'cleanupEnableBackground',
+    'removeHiddenElems',
+    'removeEmptyText',
+    'convertShapeToPath',
+    'convertEllipseToCircle',
+    'moveElemsAttrsToGroup',
+    'moveGroupAttrsToElems',
+    'collapseGroups',
+    'convertPathData',
+    'convertTransform',
+    'removeEmptyAttrs',
+    'removeEmptyContainers',
+    'mergePaths',
+    'removeUnusedNS',
+    'sortDefsChildren',
+    'removeTitle',
+    'removeDesc',
+]);
 
 class SvgVue {
 
@@ -50,7 +89,7 @@ class SvgVue {
                 {
                     loader: 'svgo-loader',
                     options: {
-                        plugins: extendDefaultPlugins(this._convertSvgoOptions(this.options.svgoSettings))
+                        plugins: this._buildSvgoPlugins(this.options.svgoSettings)
                     }
                 }
             ]
@@ -102,21 +141,37 @@ class SvgVue {
         return false;
     }
 
-    _convertSvgoOptions(options) {
-        let converted = [];
+    // Translates the user-facing svgoSettings (`[{ pluginName: value }]`) into the
+    // SVGO v2 plugin list, replacing the deprecated `extendDefaultPlugins` utility
+    // with the recommended "preset-default" + `overrides` configuration. The output
+    // is behaviourally identical to the previous implementation: a falsey value
+    // disables a default plugin, an object customizes its params, and a plugin that
+    // is not part of preset-default is appended so it runs on top of the defaults.
+    _buildSvgoPlugins(options) {
+        let overrides = {};
+        let extraPlugins = [];
 
         options.forEach(option => {
-            let settings = Object.keys(option);
+            Object.keys(option).forEach(name => {
+                let value = option[name];
 
-            settings.forEach(setting => {
-                converted.push({
-                    name: setting,
-                    active: option[setting]
-                });
+                if (PRESET_DEFAULT_PLUGINS.has(name)) {
+                    if (! value) {
+                        overrides[name] = false;
+                    } else if (value !== true) {
+                        overrides[name] = value;
+                    }
+                    // value === true: already enabled in preset-default, nothing to do.
+                } else if (value) {
+                    extraPlugins.push(name);
+                }
             });
         });
 
-        return converted;
+        return [
+            { name: 'preset-default', params: { overrides } },
+            ...extraPlugins
+        ];
     }
 
 }
