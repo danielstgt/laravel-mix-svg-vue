@@ -7,7 +7,7 @@ const SvgVue = require('../../index.js');
 //   - viewBox          -> preserved  (removeViewBox: false)
 const SOURCE_SVG =
     '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">' +
-    '<title>avatar</title><path d="M12 2L2 7"/></svg>';
+    '<title>avatar</title><path d="M12 2L2 7" fill="#000"/></svg>';
 
 // Build the exact svgo plugin list index.js hands to svgo-loader, then run it
 // through svgo the same way svgo-loader v3 does: optimize(source, { plugins }).
@@ -51,6 +51,26 @@ describe('SVGO settings (index.js)', () => {
 
             expect(out).not.toContain('viewBox');
         });
+
+        it('forwards params to an appended plugin (removeAttrs)', () => {
+            const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+            const out = optimizeWith({
+                svgoSettings: [
+                    { removeTitle: true },
+                    { removeViewBox: false },
+                    { removeDimensions: true },
+                    { removeAttrs: { attrs: 'fill' } },
+                ],
+            });
+
+            // The fill attributes are actually stripped (plugin received its params)...
+            expect(out).not.toMatch(/\sfill=/);
+            // ...and svgo does not warn about a missing "attrs" parameter.
+            expect(warn).not.toHaveBeenCalled();
+
+            warn.mockRestore();
+        });
     });
 
     describe('_buildSvgoPlugins', () => {
@@ -67,6 +87,21 @@ describe('SVGO settings (index.js)', () => {
                 // removeDimensions is not part of preset-default, so it is appended.
                 { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
                 'removeDimensions',
+            ]);
+        });
+
+        it('forwards an object value as the params of an appended plugin', () => {
+            const plugins = new SvgVue()._buildSvgoPlugins([
+                { removeDimensions: true },
+                { removeAttrs: { attrs: 'fill' } },
+            ]);
+
+            expect(plugins).toEqual([
+                { name: 'preset-default', params: { overrides: {} } },
+                // removeDimensions needs no config, so it stays a bare string;
+                // removeAttrs carries its params instead of being dropped.
+                'removeDimensions',
+                { name: 'removeAttrs', params: { attrs: 'fill' } },
             ]);
         });
 

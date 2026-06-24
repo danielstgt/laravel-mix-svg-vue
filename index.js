@@ -143,10 +143,11 @@ class SvgVue {
 
     // Translates the user-facing svgoSettings (`[{ pluginName: value }]`) into the
     // SVGO v2 plugin list, replacing the deprecated `extendDefaultPlugins` utility
-    // with the recommended "preset-default" + `overrides` configuration. The output
-    // is behaviourally identical to the previous implementation: a falsey value
-    // disables a default plugin, an object customizes its params, and a plugin that
-    // is not part of preset-default is appended so it runs on top of the defaults.
+    // with the recommended "preset-default" + `overrides` configuration. A falsey
+    // value disables a default plugin, an object customizes its params, and a plugin
+    // that is not part of preset-default is appended so it runs on top of the
+    // defaults. For an appended plugin an object value is forwarded as its `params`,
+    // so plugins that require configuration (e.g. `removeAttrs`) work as expected.
     _buildSvgoPlugins(options) {
         let overrides = {};
         let extraPlugins = [];
@@ -163,7 +164,9 @@ class SvgVue {
                     }
                     // value === true: already enabled in preset-default, nothing to do.
                 } else if (value) {
-                    extraPlugins.push(name);
+                    // value === true: enable the plugin with its own defaults.
+                    // Otherwise forward the object as the plugin's params.
+                    extraPlugins.push(value === true ? name : { name, params: value });
                 }
             });
         });
