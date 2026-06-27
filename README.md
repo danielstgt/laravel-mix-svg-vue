@@ -12,6 +12,17 @@
 
 **Extension to inline SVG files with Vue.js and optimize them automatically with SVGO.**
 
+> [!IMPORTANT]
+> As of **v0.5.0** this extension supports **Vue 3 only**. Vue 2 reached end of life on December 31, 2023, so its support has been dropped.
+>
+> Still on Vue 2? Stay on the last release that supports it:
+>
+> ```sh
+> npm install laravel-mix-svg-vue@^0.4
+> ```
+>
+> See the [release notes](CHANGELOG.md) for details.
+
 ## Installation
 
 ```sh
@@ -34,23 +45,7 @@ mix.js('resources/js/app.js', 'public/js')
     .svgVue();
 ```
 
-The last step is to import and register the Vue component, either for Vue 2 or 3. Notice the different imports for `SvgVue`:
-
-#### Vue 2
-
-```js
-// e.g. app.js
-import Vue from 'vue';
-import SvgVue from 'svg-vue';
-
-Vue.use(SvgVue);
-
-const app = new Vue({
-    el: '#app'
-});
-```
-
-#### Vue 3
+The last step is to import and register the Vue component:
 
 ```js
 // e.g. app.js
@@ -161,17 +156,17 @@ When toggling between elements that have the same tag name, you must tell Vue th
 
 ## Testing
 
-The test suite runs against both Vue 2 (`svg-vue`) and Vue 3 (`svg-vue3`). Both components now live in this repository as pnpm workspace packages under `packages/`, so a single install at the repo root wires everything up:
+The test suite runs against Vue 3 (`svg-vue3`). The component lives in this repository as a pnpm workspace package under `packages/`, so a single install at the repo root wires everything up:
 
 ```sh
 pnpm install
 ```
 
 ```sh
-# run both Vue versions
+# run the full suite (component + unit tests)
 pnpm test
 
-# or a single version
-pnpm test:vue2
+# or a single project
 pnpm test:vue3
+pnpm test:unit
 ```
