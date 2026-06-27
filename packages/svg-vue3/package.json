@@ -1,0 +1,54 @@
+{
+  "name": "svg-vue3",
+  "version": "0.2.3",
+  "description": "Laravel Mix SVG Vue Component",
+  "main": "dist/svg-vue.ssr.js",
+  "browser": "dist/svg-vue.esm.js",
+  "module": "dist/svg-vue.esm.js",
+  "unpkg": "dist/svg-vue.min.js",
+  "files": [
+    "dist/*",
+    "src/**/*.vue"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
+    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielstgt/svg-vue3.git"
+  },
+  "keywords": [
+    "laravel mix",
+    "svg-vue",
+    "component"
+  ],
+  "author": "Daniel Hartmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielstgt/laravel-mix-svg-vue/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.0",
+    "@babel/preset-env": "^7.12.0",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.3.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "minimist": "^1.2.5",
+    "rollup": "^2.79.2",
+    "rollup-plugin-vue": "^6.0.0-beta.10",
+    "vue": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}

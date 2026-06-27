@@ -1,0 +1,38 @@
+{
+  "name": "svg-vue",
+  "version": "0.2.2",
+  "description": "Laravel Mix SVG Vue Component",
+  "main": "dist/svg-vue.ssr.js",
+  "module": "dist/svg-vue.esm.js",
+  "unpkg": "dist/svg-vue.min.js",
+  "files": [
+    "dist/*",
+    "src/*.js"
+  ],
+  "scripts": {
+    "build": "rollup --config build/rollup.config.js",
+    "build:ssr": "rollup --config build/rollup.config.js --format cjs",
+    "build:es": "rollup --config build/rollup.config.js --format es",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielstgt/svg-vue.git"
+  },
+  "keywords": [
+    "laravel mix",
+    "svg-vue",
+    "component"
+  ],
+  "author": "Daniel Hartmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielstgt/laravel-mix-svg-vue/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-terser": "^1.0.0",
+    "minimist": "^1.2.8",
+    "rollup": "^2.79.2"
+  }
+}
