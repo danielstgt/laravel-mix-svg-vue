@@ -18,8 +18,8 @@
 # npm
 npm install laravel-mix-svg-vue
 
-# yarn
-yarn add laravel-mix-svg-vue
+# pnpm
+pnpm add laravel-mix-svg-vue
 ```
 
 Next require the extension inside your Laravel Mix config and call `svgVue()` in your pipeline:
@@ -161,24 +161,17 @@ When toggling between elements that have the same tag name, you must tell Vue th
 
 ## Testing
 
-The test suite runs against both Vue 2 (`svg-vue`) and Vue 3 (`svg-vue3`). The components are consumed from their local sibling repositories, so check them out next to this repo before installing:
-
-```
-code/
-├── laravel-mix-svg-vue
-├── svg-vue
-└── svg-vue3
-```
+The test suite runs against both Vue 2 (`svg-vue`) and Vue 3 (`svg-vue3`). Both components now live in this repository as pnpm workspace packages under `packages/`, so a single install at the repo root wires everything up:
 
 ```sh
-npm install
+pnpm install
 ```
 
 ```sh
 # run both Vue versions
-npm test
+pnpm test
 
 # or a single version
-npm run test:vue2
-npm run test:vue3
+pnpm test:vue2
+pnpm test:vue3
 ```

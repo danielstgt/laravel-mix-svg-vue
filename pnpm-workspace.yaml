@@ -1,0 +1,12 @@
+packages:
+  - 'packages/*'
+
+# Link the local workspace packages (svg-vue / svg-vue3) during development even
+# though the root keeps the published npm version ranges in `dependencies` for
+# publish safety. The local versions satisfy those ranges, so pnpm symlinks them.
+linkWorkspacePackages: true
+
+# Vue 2 and Vue 3 tooling are installed side by side via npm aliases (vue2/vue3,
+# vtu1/vtu2) and resolved per Jest project through moduleNameMapper. Their peer
+# ranges on a single `vue` necessarily conflict, so strict peer checks are relaxed.
+strictPeerDependencies: false
