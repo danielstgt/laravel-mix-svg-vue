@@ -1,6 +1,6 @@
 {
   "name": "svg-vue",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Laravel Mix SVG Vue Component",
   "main": "dist/svg-vue.ssr.js",
   "module": "dist/svg-vue.esm.js",
