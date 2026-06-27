@@ -3,14 +3,14 @@
 // npm aliases (vue2/vue3, vtu1/vtu2) and remapped to their canonical import names
 // per project via moduleNameMapper.
 
-// Resolve the components to the local sibling repos so changes to svg-vue /
+// Resolve the components to the local monorepo packages so changes to svg-vue /
 // svg-vue3 are picked up immediately during development. `dependencies` in
 // package.json keep the published npm versions (npm rejects a `file:` override of
 // a direct dependency, and a `file:` entry there would ship to consumers), so this
-// mapping is the publish-safe way to consume the local repos in tests.
+// mapping is the publish-safe way to consume the local packages in tests.
 const localComponents = {
-    '^svg-vue/(.*)$': '<rootDir>/../svg-vue/$1',
-    '^svg-vue3/(.*)$': '<rootDir>/../svg-vue3/$1',
+    '^svg-vue/(.*)$': '<rootDir>/packages/svg-vue/$1',
+    '^svg-vue3/(.*)$': '<rootDir>/packages/svg-vue3/$1',
 };
 
 // Resolve `require('svg-files-path/<icon>.svg')` (the webpack alias used in
