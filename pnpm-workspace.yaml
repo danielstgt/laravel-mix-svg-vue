@@ -5,9 +5,3 @@ packages:
 # root keeps the published npm version range in `dependencies` for publish safety.
 # The local version satisfies that range, so pnpm symlinks it.
 linkWorkspacePackages: true
-
-# Vue 3 and its test tooling are installed via npm aliases (vue3, vtu2) and resolved
-# through Jest's moduleNameMapper. Because the canonical `vue` package is only
-# present under those aliases, peers that expect a literal `vue` dependency would
-# otherwise trip strict peer checks, so they are relaxed.
-strictPeerDependencies: false
