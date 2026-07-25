@@ -1,7 +1,5 @@
 packages:
   - 'packages/*'
 
-# Link the local workspace package (svg-vue3) during development even though the
-# root keeps the published npm version range in `dependencies` for publish safety.
-# The local version satisfies that range, so pnpm symlinks it.
 linkWorkspacePackages: true
+autoInstallPeers: false
