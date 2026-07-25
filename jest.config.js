@@ -1,7 +1,8 @@
 // The Vue component (svg-vue3) is tested with the matching Vue 3 + test-utils
-// builds. They are installed under npm aliases (vue3, vtu2) and remapped to their
-// canonical import names via moduleNameMapper so the component sources resolve the
-// same way they do for consumers.
+// builds, installed as plain devDependencies. Only one Vue 3 exists in the tree, so
+// `vue` and `@vue/test-utils` resolve the same way they do for consumers and need no
+// remapping. `@vue/compiler-sfc` looks unused in package.json but is not: @vue/vue3-jest
+// requires it without declaring it, so it has to stay a direct devDependency.
 
 // Resolve the component to the local monorepo package so changes to svg-vue3 are
 // picked up immediately during development. `dependencies` in package.json keep the
@@ -39,18 +40,15 @@ module.exports = {
             },
             transformIgnorePatterns,
             moduleNameMapper: {
-                // Absolute paths so the aliased packages resolve even when imported
-                // from the component sources in the sibling package.
-                '^vue$': '<rootDir>/node_modules/vue3',
-                '^@vue/test-utils$': '<rootDir>/node_modules/vtu2',
                 ...localComponents,
                 ...svgFilesPath,
             },
         },
         {
             // Framework-agnostic unit tests for index.js (SVGO pipeline). Runs in
-            // node — no jsdom/Vue needed. `laravel-mix` (a peerDependency, not
-            // installed here) is mapped to a stub so index.js can be required.
+            // node — no jsdom/Vue needed. `laravel-mix` is a peerDependency owned by
+            // the consumer, so it is mapped to a stub: index.js calls `mix.extend(...)`
+            // at load time and that side effect is irrelevant to the SVGO logic here.
             displayName: 'node',
             rootDir: __dirname,
             testEnvironment: 'node',

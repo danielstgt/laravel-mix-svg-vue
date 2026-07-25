@@ -1,3 +1,6 @@
+// svgo is a devDependency, not a dependency: index.js never requires it, it only
+// builds the plugin list that svgo-loader hands to its own svgo. This test is the
+// only place that needs svgo directly — to run that list the way the loader would.
 const { optimize } = require('svgo');
 const SvgVue = require('../../index.js');
 
